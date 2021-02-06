@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+@font-face{
+	font-family: "나눔스퀘어라운드R";
+	src: url('../../resources/fonts/NanumSquareRoundR.ttf');
+}
+@font-face{
+	font-family: "나눔스퀘어라운드B";
+	src: url('../../resources/fonts/NanumSquareRoundB.ttf');
+}
+@font-face{
+	font-family: "나눔바른고딕";
+	src: url('../../resources/fonts/NanumBarunGothic.ttf');
+}
+@font-face{
+	font-family: "나눔바른펜";
+	src: url('../../resources/fonts/NanumBarunpenR.ttf');
+}
+@font-face{
+	font-family: "나눔스퀘어";
+	src: url('../../resources/fonts/NanumSquare_acR.ttf');
+}

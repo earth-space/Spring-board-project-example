@@ -39,7 +39,43 @@
 			<artifactId>javax.annotation-api</artifactId>
 			<version>1.3.1</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<!-- 제이슨 -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.6</version>
+		</dependency>
+		
+		 <!-- 대용량 파일 처리 -->
+        <dependency>
+	 		<groupId>commons-io</groupId>
+		 	<artifactId>commons-io</artifactId>
+			 <version>2.0.1</version>
+ 		</dependency>
+ 
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+ 		</dependency>
+		
+          <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+          <!-- json 변환 -->
+          <dependency>
+              <groupId>com.google.code.gson</groupId>
+              <artifactId>gson</artifactId>
+              <version>2.8.6</version>
+          </dependency>
 
+          <!-- commons-fileupload -->
+          <!-- multipart등을 사용할수 있음 -->
+          <dependency>
+              <groupId>commons-fileupload</groupId>
+              <artifactId>commons-fileupload</artifactId>
+              <version>1.3.1</version>
+          </dependency>	
 				
 		<!-- AspectJ -->
 		<dependency>

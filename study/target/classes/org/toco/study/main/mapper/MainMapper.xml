@@ -5,7 +5,83 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.toco.study.main.mapper.MainMapper">
 	
-	<select id="getBoardTitle" resultType="boardVO">
-		SELECT board_title FROM board
+	<!-- 회원(Member) 관리 -->
+	<select id="joinProcess" parameterType="MemberVO">
+		INSERT INTO MEMBER(NAME, USER_ID, PASSWORD)
+		VALUES(#{name}, #{userId}, #{password})
 	</select>
+
+	<select id="loginProcess" parameterType="String" resultType="int">
+		SELECT count(0) cnt FROM MEMBER
+		WHERE USER_ID = #{0} AND PASSWORD = #{1}
+	</select>
+	
+	<select id="idCheck" resultType="MemberVO">
+		SELECT USER_ID FROM MEMBER WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- 게시판(Board) 관리 -->
+	<select id="viewBoard" resultType="boardVO">
+		SELECT ROWNUM RN, board_no, user_id, board_title, board_content, board_date, board_file1, board_file2, replyCount 
+		FROM 
+		(
+			SELECT ROWNUM RN, a.board_no, a.user_id, a.board_title, a.board_content, a.board_date, a.board_file1, a.board_file2, a.replyCount 
+			FROM
+			(
+				SELECT board_no, user_id, board_title, board_content, board_date, board_file1, board_file2,
+				(
+					SELECT count(0) FROM reply WHERE board_no = b.board_no
+				) AS replyCount
+				FROM board b
+				ORDER BY board_no DESC
+			) a
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+
+	<select id="writeProcess">
+		INSERT INTO board(board_no, board_title, board_content, user_id, board_file1, board_file2)
+		VALUES(board_seq.NEXTVAL, #{boardTitle}, #{boardContent}, #{userId}, #{boardFile1, jdbcType=VARCHAR}, #{boardFile2, jdbcType=VARCHAR})
+	</select>
+
+	<select id="viewContent" parameterType="int" resultType="boardVO">
+		SELECT board_no, user_id, board_title, board_content, board_date, board_file1, board_file2 FROM board
+		WHERE board_no = #{boardNo}
+	</select>
+	
+	<select id="cntContent" resultType="int">
+		SELECT count(0) FROM board
+	</select>
+	
+	<update id="updateProcess">
+		UPDATE board SET board_title = #{boardTitle}, board_content = #{boardContent}, board_file1 = #{boardFile1, jdbcType=VARCHAR}, board_file2 = #{boardFile2, jdbcType=VARCHAR}
+		WHERE board_no = #{boardNo}
+	</update>
+
+	<delete id="deleteProcess">
+		DELETE FROM board
+		WHERE board_no = #{boardNo}
+	</delete>
+	
+	
+	<!-- 댓글(Reply) 관리 -->
+	<select id="viewReply" resultType="ReplyVO">
+		SELECT reply_no, reply_writer, reply_content, reply_date FROM reply 
+		WHERE board_no = #{boardNo} ORDER BY reply_no ASC
+	</select>
+	
+	<select id="writeReply">
+		INSERT INTO reply(board_no, reply_no, reply_writer, reply_content)
+		VALUES(#{boardNo}, reply_seq.NEXTVAL, #{replyWriter}, #{replyContent})
+	</select>
+	
+	<update id="updateReply">
+		UPDATE reply SET reply_content = #{replyContent, jdbcType=VARCHAR}
+		WHERE reply_no = #{replyNo}
+	</update>
+	
+	<delete id="deleteReply">
+		DELETE FROM reply
+		WHERE reply_no = #{replyNo}
+	</delete>
 </mapper>
