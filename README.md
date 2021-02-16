@@ -1,5 +1,9 @@
-# Study
-# 스프링 게시판
+# Spring Mini Project for Spring Beginner
+# Board
 
-스프링의 컨트롤러, 매퍼, 서비스, vo의 구조를 공부하기 좋은 프로젝트 <br>
-https://blog.naver.com/jisoo___ 개인 블로그에 자세한 개발 과정이 담겨있다
+About Sping MVC Patterns <br>
+Easy Expression <br>
+Learning Fast for 2 Week <br> 
+
+
+KOR https://blog.naver.com/jisoo___ 
